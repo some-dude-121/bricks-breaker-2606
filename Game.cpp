@@ -20,12 +20,23 @@ void Game::Reset()
 	ResetBall();
 
 	// TODO #2 - Add this brick and 4 more bricks to the vector
-	brick.width = 10;
-	brick.height = 2;
-	brick.x_position = 0;
-	brick.y_position = 5;
-	brick.doubleThick = true;
-	brick.color = ConsoleColor::DarkGreen;
+
+	brick.clear(); //gotta clear the boxes right? im a test with out if it would give a intresting challenge >:3
+
+	for (int i = 0; i < 5;i++) // simple for loop, hopefully it works when i get the other errors fixed
+	{
+		Box brick;
+
+		brick.width = 10;
+		brick.height = 2;
+		brick.x_position = i * 12; //i completly forgot that the x postion was the horizontal plain and was going to leave this alone ;-;
+		brick.y_position = 5;
+		brick.doubleThick = true;
+		brick.color = ConsoleColor::DarkGreen;
+		
+		Game::brick.push_back(brick); //me had a head ache when i did not incluse the Game:: at the start
+
+	} //yippe! cleared the errors here! :D on to the next one!!!
 }
 
 void Game::ResetBall()
