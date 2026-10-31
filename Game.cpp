@@ -32,7 +32,7 @@ void Game::Reset()
 		brick.x_position = i * 12; //i completly forgot that the x postion was the horizontal plain and was going to leave this alone ;-;
 		brick.y_position = 5;
 		brick.doubleThick = true;
-		brick.color = ConsoleColor::DarkGreen;
+		brick.color = ConsoleColor::DarkGreen; // huh, i dont think this is the right color becasue after two hits it dissapears! should i change that?
 		
 		Game::brick.push_back(brick); //me had a head ache when i did not incluse the Game:: at the start
 
@@ -90,6 +90,8 @@ void Game::Render() const
 
 void Game::CheckCollision()
 {
+	int removeindex = -1; //added these two to keep track of the boxes to delete later
+	int index = 0;
 	for (Box& brick : Game::brick) // simply implemented the colitoon back to the code as the first todo was stated :D (its still too easy *super sus eyes)
 	{
 		// TODO #4 - Update collision to check all bricks
@@ -99,8 +101,17 @@ void Game::CheckCollision()
 			ball.y_velocity *= -1;
 
 			// TODO #5 - If the ball hits the same brick 3 times (color == black), remove it from the vector
-
+			if (brick.color == ConsoleColor::Black)
+			{
+				removeindex = index; // simple storage to track which block will turn black! :D
+			}
+			break;
 		}
+		++index;
+	}
+	if (removeindex != -1)
+	{
+		Game::brick.erase(Game::brick.begin() + removeindex); //bye bye brick! just deletes the brick that turns black without moving the others! :D
 	}
 	// TODO #6 - If no bricks remain, pause ball and display (render) victory text with R to reset
 	
