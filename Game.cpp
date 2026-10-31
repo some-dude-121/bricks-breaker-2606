@@ -80,7 +80,10 @@ void Game::Render() const
 	ball.Draw();
 
 	// TODO #3 - Update render to render all bricks
-	brick.Draw();
+	for (const Box& brick : Game::brick) // well this was easy ... too easy *squinting eyes*
+	{
+		brick.Draw();
+	}
 
 	Console::Lock(false);
 }
@@ -98,7 +101,7 @@ void Game::CheckCollision()
 	}
 
 	// TODO #6 - If no bricks remain, pause ball and display (render) victory text with R to reset
-
+	
 
 	if (paddle.Contains(ball.x_position + ball.x_velocity, ball.y_velocity + ball.y_position))
 	{
